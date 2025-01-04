@@ -52,52 +52,39 @@ step-6 Run the program.
 
 **PROGRAM**
 ~~~
-module JKFLIPFLOP(q, qb,j,k,clock,reset);
-    input j,k,clock,reset;
-    output reg q, qb;
-	 
-always @ (posedge (clock))
-
-    begin 
-        if (!reset)
-            begin
-               q <= q;
-               qb <=qb;
-            end   
-        
-else
-   begin
-	   if(j==0 && k==0)
-		   begin
-			q<=q;
-			qb<=qb;
-			end
-		else if(j!=k)
-		   begin
-			q<=j;
-			qb<=k;
-			end
-		else if(j==1 && k==1)
-		    begin
-			 q<=~q;
-			 qb<=~qb;
-			 end
-	end
-end	
+module jk_ff (j, k, clk, rst, q);
+  input j, k, clk, rst;
+  output reg q;
+  always @(posedge clk or posedge rst) begin
+    if (rst)
+      q <= 0; // Reset the flip-flop
+    else if (j == 0 && k == 0)
+      q <= q; // No change
+    else if (j == 0 && k == 1)
+      q <= 0; // Reset
+    else if (j == 1 && k == 0)
+      q <= 1; // Set
+    else if (j == 1 && k == 1)
+      q <= ~q; // Toggle
+  end
 endmodule
+			
+		
 ~~~
 
- Developed by:GURUPARAN G RegisterNumber:24001677
+ Developed by:GURUPARAN G 
+ RegisterNumber:24001677
 
 
 **RTL LOGIC FOR FLIPFLOPS**
 
-![Screenshot 2024-12-25 160303](https://github.com/user-attachments/assets/f6d1c295-1fc7-439a-a9b7-544f6791e83a)
+![Screenshot 2025-01-04 081627](https://github.com/user-attachments/assets/0c98c986-31e7-44b7-b995-e59bcf3561de)
 
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
 
-![Screenshot 2024-12-25 160326](https://github.com/user-attachments/assets/6ede5e52-0cc1-4c59-aace-794350f09527)
+
+![Screenshot 2025-01-04 081645](https://github.com/user-attachments/assets/2faa67e7-c8b2-4c5d-bb00-6debab578e33)
 
 
 **RESULTS**
